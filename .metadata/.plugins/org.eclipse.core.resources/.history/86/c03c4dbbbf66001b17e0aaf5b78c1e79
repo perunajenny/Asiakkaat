@@ -1,0 +1,64 @@
+package metodi;
+
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+public class Verkkokauppa {
+	
+	public double kysyJaLaskePainot() {
+	
+	double paino;
+	double yhteispaino = 0;
+	
+	Scanner input = new Scanner(System.in);
+	
+	System.out.print("Anna tuotteen paino kiloina (-1 lopettaa): ");
+	paino = input.nextDouble();
+	
+	do {
+		
+		yhteispaino = yhteispaino + paino;
+		
+		System.out.print("Anna tuotteen paino kiloina (-1 lopettaa): ");
+			
+	} while (paino != -1);
+	
+	
+	
+	return yhteispaino;
+	
+	}
+	
+	public void naytaPostituskulut(double yhteispaino) {
+		
+		double postituskulu = 0;
+		
+		if (yhteispaino < 20) {
+			
+			postituskulu = 8.1;
+		} else if (yhteispaino >= 20 && yhteispaino <= 100) {
+			postituskulu = 14;
+		} else if (yhteispaino > 100);
+		
+		DecimalFormat desimaalit = new DecimalFormat("0.0");
+		System.out.println("Yhteispaino on " + desimaalit.format(yhteispaino) + " kiloa. " + "\nPostituskulu on " + desimaalit.format(postituskulu) + " euroa.");
+		
+		
+	}
+	
+	
+	public static void main(String[] args) {
+		
+		Verkkokauppa ohjelma = new Verkkokauppa();
+		
+		double yhteispaino, postituskulu;
+		
+		yhteispaino = ohjelma.kysyJaLaskePainot();
+		postituskulu = ohjelma.kysyJaLaskePainot();ohjelma.naytaPostituskulut(yhteispaino);
+		
+		
+		
+		
+	}
+
+}

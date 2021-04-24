@@ -1,0 +1,43 @@
+package taulukko;
+import java.time.LocalDate;
+import java.util.Scanner;
+
+
+public class Syntymapaiva {
+	
+	public static void main(String[] args) {
+		
+		LocalDate spaiva;
+		String paiva;
+		
+		Scanner input = new Scanner(System.in);
+		
+		System.out.print("Anna syntymäpäiväsi");
+		paiva = input.nextLine();
+		
+		try {
+			
+			spaiva = LocalDate.parse(paiva);
+			
+			int vuosi = spaiva.getYear();
+			
+			int nytVuosi = LocalDate.now().getYear();
+			
+			if (vuosi > nytVuosi) {
+				System.out.println("Syntymäpäivä ei voi olla tulevaisuudessa");
+			} else {
+				
+				System.out.println("Syntymävuosi on " + vuosi);
+			}
+			
+			
+		} catch (Exception error) {
+			System.out.println("Syntymäpäivä on virheellinen.");
+			
+		}
+		
+		
+		
+	}
+
+}

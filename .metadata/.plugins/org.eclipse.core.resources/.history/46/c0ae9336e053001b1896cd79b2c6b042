@@ -1,0 +1,16 @@
+package Perusteet;
+
+public class Puoluetuki {
+	
+	public static void main (String[] args) {
+		
+		int lkm = 10;
+		
+		int puoluetuki = lkm * 148175;
+		
+		System.out.println("Anna kansanedustajien lukumäärä: "+  lkm);
+		System.out.println("Puoluetuen määrä on: "+ puoluetuki + " euroa");
+		
+	}
+
+}

@@ -1,0 +1,8 @@
+package ensimmäinenviikko;
+
+public class hello {
+public static void main(String[] args) {
+	String nimi = "Jenny";
+	System.out.println("Terve vaan" + nimi);
+	}
+}
