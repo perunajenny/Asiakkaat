@@ -21,15 +21,19 @@
 <table id="listaus">
 	<thead>	
 		<tr>
+		<th colspan="5" class="oikealle"><span id="uusiAsiakas">Lis‰‰ uusi asiakas</span></th>
+		</tr>
+		<tr>
 		<th class="oikealle">Hakusana:</th>
-		<th colspan="2"><input type="text" id="hakusana"></th>
+		<th colspan="3"><input type="text" id="hakusana"></th>
 		<th class="vasemmalle"><input type="button" value="Hae" id="hakunappi"></th>
 		</tr>			
 		<tr>
 			<th class="vasemmalle">Etunimi</th>
 			<th class="vasemmalle">Sukunimi</th>
 			<th class="vasemmalle">Puhelin</th>
-			<th class="vasemmalle">Sposti</th>							
+			<th class="vasemmalle">Sposti</th>		
+			<th></th>					
 		</tr>
 	</thead>
 	<tbody>
@@ -38,13 +42,16 @@
 <script>
 $(document).ready(function(){
 	
+	$("#uusiAsiakas").click(function(){
+		document.location="lisaaasiakas.jsp";
+	});
+	
 	haeAsiakkaat();
 	$("#hakunappi").click(function() {
-		console.log($("#hakusana").val());
 		haeAsiakkaat();
 	});
 	$(document.body).on("keydown", function(event){
-		  if(event.which==13){ //Enteri‰ painettu, ajetaan haku
+		  if(event.which==13){
 			  haeAsiakkaat();
 		  }
 	});
@@ -60,15 +67,27 @@ function haeAsiakkaat() {
         	htmlStr+="<td>"+field.etunimi+"</td>";
         	htmlStr+="<td>"+field.sukunimi+"</td>";
         	htmlStr+="<td>"+field.puhelin+"</td>";
-        	htmlStr+="<td>"+field.sposti+"</td>";  
+        	htmlStr+="<td>"+field.sposti+"</td>";
+        	htmlStr+="<td><span class='poista' onclick=poista('"+field.etunimi+"')>Poista</span></td>";  
         	htmlStr+="</tr>";
         	$("#listaus tbody").append(htmlStr);
         });	
     }});
-	
-	
 }
 
+function poista(etunimi){
+	if(confirm("Poista asiakas " + etunimi +"?")){
+		$.ajax({url:"asiakkaat/"+etunimi, type:"DELETE", dataType:"json", success:function(result) { //result on joko {"response:1"} tai {"response:0"}
+	        if(result.response==0){
+	        	$("#ilmo").html("Asiakkaan poisto ep‰onnistui.");
+	        }else if(result.response==1){
+	        	$("#rivi_"+etunimi).css("background-color", "red"); //V‰rj‰t‰‰n poistetun asiakkaan rivi
+	        	alert("Asiakkaan " + etunimi +" poisto onnistui.");
+				haeAsiakkaat();        	
+			}
+	    }});
+	}
+}
 </script>
 
 </body>
