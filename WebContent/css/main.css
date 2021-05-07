@@ -21,3 +21,15 @@ table th {
   background-color: #4CAF50;
   color: white;
 }
+
+#uusiAsiakas, #takaisin {
+	color: white;
+	cursor: pointer;
+}
+
+.oikealle{
+	text-align: right;
+}
+.vasemmalle{
+	text-align: left;
+}
